@@ -20,7 +20,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout = 1;
 
-
   boot.initrd.luks.devices.crypted.device = "/dev/sda1";
   fileSystems."/".device = "/dev/mapper/crypted";
 
@@ -34,11 +33,6 @@
   networking.useDHCP = false;
   networking.interfaces.eno0.useDHCP = true;
   networking.interfaces.wlp2s0.useDHCP = true;
-
-  #networking.wireless.extraConfig = ''
-  # ctrl_interface=/run/wpa_supplicant
-  # ctrl_interface_group=wheel
-  #'';
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -107,8 +101,6 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   services.udev.packages = [ pkgs.yubikey-personalization pkgs.libu2f-host pkgs.rtl-sdr ];
-
-  #networking.wireless.userControlled = true;
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [22];
