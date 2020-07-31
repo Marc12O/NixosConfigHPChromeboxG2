@@ -102,6 +102,18 @@
   services.openssh.enable = true;
   services.udev.packages = [ pkgs.yubikey-personalization pkgs.libu2f-host pkgs.rtl-sdr ];
 
+  services.udev = {
+      path = [ pkgs.coreutils ];
+      extraRules = ''
+        SUBSYSTEM=="usb",ENV{DEVTYPE}=="usb_device",ATTRS{idVendor}=="1df7",ATTRS{idProduct}=="2500",MODE:="0666"
+        SUBSYSTEM=="usb",ENV{DEVTYPE}=="usb_device",ATTRS{idVendor}=="1df7",ATTRS{idProduct}=="3000",MODE:="0666"
+        SUBSYSTEM=="usb",ENV{DEVTYPE}=="usb_device",ATTRS{idVendor}=="1df7",ATTRS{idProduct}=="3010",MODE:="0666"
+        SUBSYSTEM=="usb",ENV{DEVTYPE}=="usb_device",ATTRS{idVendor}=="1df7",ATTRS{idProduct}=="3020",MODE:="0666"
+      '';
+  };
+
+
+
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [22];
   # networking.firewall.allowedUDPPorts = [ ... ];
